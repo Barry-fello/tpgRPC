@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/protobuf/empty.proto";
+
+option java_package = "ditinn.proto.auth";
+option java_multiple_files = true;
+
+// Enumération pour les statuts de réponse
+enum ResponseStatus {
+  GOOD = 0;
+  BAD = 1;
+  DONE = 2;
+  ERROR = 3;
+}
+// Message pour inclure les informations du client
+message ClientInfo {
+  string ipAddress = 1;  // Adresse IP du client
+  int32 port = 2;        // Port du client
+  string message = 3;    // Message log
+}
+
+// Message pour la gestion des identités
+message Identite {
+  string login = 1;        // Identifiant de l'utilisateur
+  string password = 2;     // Mot de passe
+  string timestamp = 3;    // Horodatage
+}
+// Message pour la réponse vide
+message EmptyResponse {}
+// Message pour la réponse aux identités
+message IdentiteResponse {
+  ResponseStatus status = 1;  // Statut de la réponse
+}
+
+// Message pour les requêtes d'authentification
+message AuthRequest {
+  Identite identiteRequest = 1;
+}
+
+// Service pour vérifier les identités
+service ASChecker {
+  rpc simpleCheck(Identite) returns (IdentiteResponse);
+}
+
+// Service pour gérer les utilisateurs
+service ASManager {
+  rpc simplesCheck(Identite) returns (IdentiteResponse);
+  rpc add(AuthRequest) returns (IdentiteResponse);
+  rpc update(AuthRequest) returns (IdentiteResponse);
+  rpc delete(AuthRequest) returns (IdentiteResponse);
+}
+
+// Service de journalisation
+service LoggingService {
+  rpc simpleLog(ClientInfo) returns (EmptyResponse);
+}
