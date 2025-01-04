@@ -1,6 +1,8 @@
-package auth;
+package journalisation;
 
-import ditinn.proto.auth.*;
+import ditinn.proto.auth.ClientInfo;
+import ditinn.proto.auth.EmptyResponse;
+import ditinn.proto.auth.LoggingServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 public class LogginServiceImp extends LoggingServiceGrpc.LoggingServiceImplBase {

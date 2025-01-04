@@ -56,3 +56,20 @@ service ASManager {
 service LoggingService {
   rpc simpleLog(ClientInfo) returns (EmptyResponse);
 }
+// Requête pour récupérer les logs (peut être vide ou avec des critères)
+message GetLogRequest {
+  string filter = 1; // Optionnel : critère de filtrage (type, date, etc.)
+}
+
+// Représentation d'une entrée de log
+message LogRequest {
+ ClientInfo client = 1;
+  ResponseStatus response = 2;    // Type de log : "INFO", "ERROR", etc.
+  string action = 3;      // Action effectuée
+  string details = 4;     // Informations complémentaires
+  string timestamp = 5;   // Date et heure
+}
+service LogService{
+  rpc getLogs(GetLogRequest) returns (stream LogRequest);
+
+}

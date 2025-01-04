@@ -45,7 +45,7 @@ public class ClientManger {
             switch (choix) {
                 case 0 :
                     scanner.close();
-                    System.out.println(" Aurevoir ");
+                    System.out.println(" Deconnexion ");
                     fin = true;
                     break;
                 case 1:

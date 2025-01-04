@@ -2,6 +2,7 @@ package auth;
 
 import ditinn.proto.auth.LoggingServiceGrpc;
 import io.grpc.*;
+import journalisation.LogUtils;
 
 public class GestAuth {
 
@@ -13,14 +14,16 @@ public class GestAuth {
             ManagedChannel logChannel = ManagedChannelBuilder.forAddress("localhost", 3244)
                     .usePlaintext()
                     .build();
-            LoggingServiceGrpc.LoggingServiceBlockingStub logClient = LoggingServiceGrpc.newBlockingStub(logChannel);
+            LoggingServiceGrpc.LoggingServiceBlockingStub logStub = LoggingServiceGrpc.newBlockingStub(logChannel);
+
+            LogUtils logClient = new LogUtils(logStub);
             // Instanciation du servant Gestionnaire
-            ASCheckerServiceImp checkerService = new ASCheckerServiceImp(metierAuth,logClient);
+            ASCheckerServiceImp checkerService = new ASCheckerServiceImp(metierAuth, logClient);
             ASManagerServiceImp managerService = new ASManagerServiceImp(metierAuth, logClient);
             // Initialisation du serveur sur le port 40555
             Server server = ServerBuilder.forPort(28414)
                     .addService(ServerInterceptors.intercept(checkerService, checkerService))
-                    .addService(ServerInterceptors.intercept(managerService, managerService)) // Manager comme intercepteur
+                    .addService(ServerInterceptors.intercept(managerService, managerService))
                     .build()
                     .start();
             // Interception Ctrl C et arrêt processus

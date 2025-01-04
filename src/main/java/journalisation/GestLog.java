@@ -1,15 +1,16 @@
-package auth;
+package journalisation;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
-public class LogServer {
+public class GestLog {
     public static void main(String[] args) {
         try {
             // Création et démarrage du serveur gRPC
             Server server = ServerBuilder
                     .forPort(3244)
                     .addService(new LogginServiceImp())
+                    .addService(new LogServiceImp())
                     .build()
                     .start();
             System.out.println("Serveur de journalisation démarré sur le port 3244");

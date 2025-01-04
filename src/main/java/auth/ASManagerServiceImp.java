@@ -3,24 +3,23 @@ package auth;
 import ditinn.proto.auth.*;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;
+import journalisation.LogUtils;
 
 import java.util.Objects;
-import java.util.logging.Logger;
+
 
 public class ASManagerServiceImp extends ASManagerGrpc.ASManagerImplBase implements ServerInterceptor {
-    private static final Logger logger = Logger.getLogger(ASManagerServiceImp.class.getName());
 
     private final MetierAuth metierAuth;
     private final ASCheckerServiceImp asCheckerServiceImp;
-    private final LoggingServiceGrpc.LoggingServiceBlockingStub logClient;
-
+    private final LogUtils logUtils;
     private int port;
     private String host;
 
-    public ASManagerServiceImp(MetierAuth metierAuth, LoggingServiceGrpc.LoggingServiceBlockingStub logClient) {
+    public ASManagerServiceImp(MetierAuth metierAuth, LogUtils logUtils) {
         this.metierAuth = metierAuth;
-        this.asCheckerServiceImp = new ASCheckerServiceImp(metierAuth,logClient);
-        this.logClient = logClient;
+        this.asCheckerServiceImp = new ASCheckerServiceImp(metierAuth, logUtils);
+        this.logUtils = logUtils;
     }
 
     @Override
@@ -56,23 +55,6 @@ public class ASManagerServiceImp extends ASManagerGrpc.ASManagerImplBase impleme
         responseStreamObserver.onCompleted();
 
     }
-    private void getRemoteAddr(String inetSocketString) {
-        host = inetSocketString.substring(0, inetSocketString.lastIndexOf(':'));
-        port = Integer.parseInt(inetSocketString.substring(inetSocketString.lastIndexOf(':') + 1));
-    }
-
-    private void logToServer(String message) {
-        // Construire le message de journalisation
-        ClientInfo logRequest = ClientInfo.newBuilder()
-                .setIpAddress(host)
-                .setPort(port)
-                .setMessage(message)
-                .build();
-
-        // Envoyer au serveur de journalisation
-        logClient.simpleLog(logRequest);
-    }
-
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
             ServerCall<ReqT, RespT> call,
@@ -81,13 +63,16 @@ public class ASManagerServiceImp extends ASManagerGrpc.ASManagerImplBase impleme
         // Obtenir l'adresse du client
         String inetSocketString = Objects.requireNonNull(call.getAttributes()
                 .get(Grpc.TRANSPORT_ATTR_REMOTE_ADDR)).toString();
-        getRemoteAddr(inetSocketString);
+        logUtils.getRemoteAddr(inetSocketString);
 
         // Journaliser la connexion interceptée
-        logger.info("Le client connecté: IP=" + host + ", Port=" + port);
-        logToServer("Requête interceptée venant du  ClientManager");
+        LogUtils.logger.info("Le client connecté: IP=" + logUtils.getHost()
+                + ", Port=" + logUtils.getPort()
+                + ", resultat" + headers);
+        logUtils.logToServer("Requête interceptée venant du  ClientManager",headers);
 
-        return next.startCall(new ForwardingServerCall.SimpleForwardingServerCall<>(call) {}, headers);
+        return next.startCall(
+                new ForwardingServerCall.SimpleForwardingServerCall<>(call) {}, headers);
     }
 
 }
