@@ -1,5 +1,7 @@
 syntax = "proto3";
-
+/*
+ * Auteur : BARRY Ibrahima
+ */
 package auth;
 
 import "google/protobuf/empty.proto";
@@ -14,24 +16,24 @@ enum ResponseStatus {
   DONE = 2;
   ERROR = 3;
 }
-// Message pour inclure les informations du client
+// Message pour les informations du client
 message ClientInfo {
-  string ipAddress = 1;  // Adresse IP du client
-  int32 port = 2;        // Port du client
-  string message = 3;    // Message log
+  string ipAddress = 1;
+  int32 port = 2;
+  string message = 3;
 }
 
 // Message pour la gestion des identités
 message Identite {
-  string login = 1;        // Identifiant de l'utilisateur
-  string password = 2;     // Mot de passe
-  string timestamp = 3;    // Horodatage
+  string login = 1;
+  string password = 2;
+  string dateTime = 3;
 }
 // Message pour la réponse vide
 message EmptyResponse {}
 // Message pour la réponse aux identités
 message IdentiteResponse {
-  ResponseStatus status = 1;  // Statut de la réponse
+  ResponseStatus status = 1;
 }
 
 // Message pour les requêtes d'authentification
@@ -39,12 +41,12 @@ message AuthRequest {
   Identite identiteRequest = 1;
 }
 
-// Service pour vérifier les identités
+// Service les opérations de client checker
 service ASChecker {
   rpc simpleCheck(Identite) returns (IdentiteResponse);
 }
 
-// Service pour gérer les utilisateurs
+// Service pour les opérations de client manager
 service ASManager {
   rpc simplesCheck(Identite) returns (IdentiteResponse);
   rpc add(AuthRequest) returns (IdentiteResponse);
@@ -52,24 +54,11 @@ service ASManager {
   rpc delete(AuthRequest) returns (IdentiteResponse);
 }
 
-// Service de journalisation
+// Service pour la journalisation
 service LoggingService {
   rpc simpleLog(ClientInfo) returns (EmptyResponse);
 }
 // Requête pour récupérer les logs (peut être vide ou avec des critères)
 message GetLogRequest {
-  string filter = 1; // Optionnel : critère de filtrage (type, date, etc.)
-}
-
-// Représentation d'une entrée de log
-message LogRequest {
- ClientInfo client = 1;
-  ResponseStatus response = 2;    // Type de log : "INFO", "ERROR", etc.
-  string action = 3;      // Action effectuée
-  string details = 4;     // Informations complémentaires
-  string timestamp = 5;   // Date et heure
-}
-service LogService{
-  rpc getLogs(GetLogRequest) returns (stream LogRequest);
-
+  string filter = 1;
 }

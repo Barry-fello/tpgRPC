@@ -1,5 +1,7 @@
 package auth;
-
+/*
+ * Auteur : BARRY Ibrahima
+ */
 import ditinn.proto.auth.*;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;

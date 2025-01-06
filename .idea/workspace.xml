@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="927acca6-aa8a-4c20-bbbb-a612a9a55d54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/journalisation/ClientLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/journalisation/GestLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/journalisation/LogServiceImp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/journalisation/LogUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/journalisation/LogginServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/auth/ASCheckerServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/ASCheckerServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/auth/ASManagerServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/ASManagerServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/auth/ClientChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/ClientChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/auth/ClientManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/ClientManger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/auth/GestAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/GestAuth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/auth/LogServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/auth/LogginServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/journalisation/ClientLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/journalisation/GestLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/journalisation/GestLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/journalisation/LogServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/journalisation/LogUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/journalisation/LogUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/journalisation/LogginServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/journalisation/LogginServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/proto/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/auth.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +52,7 @@
     "Application.GestLog.executor": "Run",
     "Application.LogServer.executor": "Run",
     "Application.LogginServer.executor": "Run",
+    "Maven.logginservice1 [compile].executor": "Run",
     "Maven.logginservice1 [org.xolstice.maven.plugins:protobuf-maven-plugin:0.6.1:compile].executor": "Run",
     "Maven.logginservice1 [protobuf:compile].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -129,6 +129,10 @@
       <workItem from="1735761371450" duration="14904000" />
       <workItem from="1735846997467" duration="16281000" />
       <workItem from="1735920405758" duration="15879000" />
+      <workItem from="1735957080131" duration="243000" />
+      <workItem from="1735978218638" duration="98000" />
+      <workItem from="1735995212956" duration="1905000" />
+      <workItem from="1736094641447" duration="9620000" />
     </task>
     <servers />
   </component>

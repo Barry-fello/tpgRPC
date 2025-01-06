@@ -1,7 +1,11 @@
 package journalisation;
 
+/*
+ * Auteur : BARRY Ibrahima
+ */
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+
 
 public class GestLog {
     public static void main(String[] args) {
@@ -10,7 +14,6 @@ public class GestLog {
             Server server = ServerBuilder
                     .forPort(3244)
                     .addService(new LogginServiceImp())
-                    .addService(new LogServiceImp())
                     .build()
                     .start();
             System.out.println("Serveur de journalisation démarré sur le port 3244");

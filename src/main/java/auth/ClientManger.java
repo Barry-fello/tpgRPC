@@ -1,6 +1,8 @@
 package auth;
 
-
+/*
+ * Auteur : BARRY Ibrahima
+ */
 import ditinn.proto.auth.ASManagerGrpc;
 
 
@@ -18,7 +20,6 @@ public class ClientManger {
         ManagedChannel channel =  ManagedChannelBuilder.forAddress("localhost",28414)
                         .usePlaintext().build();
        ASManagerGrpc.ASManagerBlockingStub blockingStub = ASManagerGrpc.newBlockingStub(channel);
-
 
 
         Scanner scanner = new Scanner(System.in);

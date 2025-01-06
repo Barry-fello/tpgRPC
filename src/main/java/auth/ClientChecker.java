@@ -1,7 +1,8 @@
 package auth;
-
+/*
+ * Auteur : BARRY Ibrahima
+ */
 import ditinn.proto.auth.ASCheckerGrpc;
-import ditinn.proto.auth.ClientInfo;
 import ditinn.proto.auth.Identite;
 import ditinn.proto.auth.IdentiteResponse;
 import io.grpc.ManagedChannel;

@@ -1,11 +1,13 @@
 package journalisation;
-
+/*
+ * Auteur : BARRY Ibrahima
+ */
 import ditinn.proto.auth.ClientInfo;
 import ditinn.proto.auth.EmptyResponse;
 import ditinn.proto.auth.LoggingServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
-public class LogginServiceImp extends LoggingServiceGrpc.LoggingServiceImplBase {
+public class    LogginServiceImp extends LoggingServiceGrpc.LoggingServiceImplBase {
     @Override
     public void simpleLog(ClientInfo request, StreamObserver<EmptyResponse> responseObserver) {
         System.out.println("Journalisation reçue :");
